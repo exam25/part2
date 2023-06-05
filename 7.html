@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virus Detection</title>
+</head>
+<body>
+    <label for="virus">Virus Composition:</label>
+    <input type="text" id="virus">
+    <br><br>
+    <label for="blood">Blood Composition:</label>
+    <input type="text" id="blood">
+    <br><br>
+    <button onclick="checkComposition()">Check</button>
+
+    <script>
+        function checkComposition() {
+            const virus = document.getElementById('virus').value.toLowerCase();
+            const blood = document.getElementById('blood').value.toLowerCase();
+
+            if (isSubsequence(virus, blood)) {
+                alert("POSITIVE");
+            } else {
+                alert("NEGATIVE");
+            }
+        }
+
+        function isSubsequence(virus, blood) {
+            let i = 0;
+            let j = 0;
+
+            while (i < virus.length && j < blood.length) {
+                if (virus[i] === blood[j]) {
+                    j++;
+                }
+                i++;
+            }
+
+            return j === blood.length;
+        }
+    </script>
+</body>
+</html>
