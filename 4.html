@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trip Planner</title>
+</head>
+<body>
+    <label for="location">Enter Location</label>
+    <input id="location" type="text">
+    <button onclick="planTrip()">Plan Trip</button>
+
+    <div id="output"></div>
+
+    <script>
+        function check(loc){
+            return new Promise((resolve, reject) => {
+                const locl = loc.toLowerCase();
+                if(locl === "paris")
+                    resolve("Let's take a trip to " + loc);
+                else 
+                    reject("Invalid location");
+            });
+        }
+
+        function planTrip(){
+            const locationInput = document.getElementById("location");
+            const location = locationInput.value;
+
+            check(location)
+                .then((message) => {
+                    const output = document.getElementById("output");
+                    output.innerHTML = message;
+                })
+                .catch((error) => {
+                    const output = document.getElementById("output");
+                    output.innerHTML = error;
+                });
+        }
+        
+    </script>
+</body>
+</html>
