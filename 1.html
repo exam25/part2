@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // Using Map
+            let map = new Map();
+            map.set("name", "John");
+            map.set("age", 30);
+            map.set("city", "New York");
+
+            // Using Object
+            let obj = {
+            name: "John",
+            age: 30,
+            city: "New York"
+            };
+
+            console.log("Map:", map);
+            console.log("Object:", obj);
+
+                /*    
+                Preservation of insertion order: Map objects preserve
+                the order of key-value pairs, whereas Objects do not 
+                guarantee the order. This can be beneficial in scenarios 
+                where the order of keys is important.
+
+                Efficient addition and removal of keys: Map objects provide 
+                efficient methods for adding and removing keys. The set() 
+                method is used to add a key-value pair, and the delete() 
+                method is used to remove a key. These operations have a 
+                consistent time complexity of O(1).
+                */
+
+            // Using Map
+            let map1 = new Map();
+            console.time("Map");
+            for (let i = 0; i < 1000000; i++) {
+                map1.set(`key${i}`, i);
+            }
+            for (let i = 0; i < 1000000; i++) {
+                map1.delete(`key${i}`);
+            }
+            console.timeEnd("Map");
+
+            // Using Object
+            let obj1 = {};
+            console.time("Object");
+            for (let i = 0; i < 1000000; i++) {
+                obj1[`key${i}`] = i;
+            }
+            for (let i = 0; i < 1000000; i++) {
+                delete obj1[`key${i}`];
+            }
+            console.timeEnd("Object");
+
+        </script>
+    </body>
+</html>

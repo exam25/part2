@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set vs Array</title>
+</head>
+<body>
+    <label for="value">Enter Value</label>
+    <input type="text" id="value">
+    <button onclick="searchValue()">Search</button>
+
+    <div id="result"></div>
+
+    <script>
+        let set = new Set();
+        let array = [];
+
+        function searchValue() {
+            let value = parseInt(document.getElementById("value").value);
+
+            for(let i=0; i<1000000; i++){
+                set.add(i);
+                array.push(i);
+            }
+            
+            let setResult, arrayResult;
+
+            console.time("Set Search");
+            setResult = set.has(value);
+            console.timeEnd("Set Search");
+
+            console.time("Array Search");
+            arrayResult = array.includes(value);
+            console.timeEnd("Array Search");
+
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `Set: ${setResult}, Array: ${arrayResult}`;
+        }
+    </script>
+</body>
+</html>

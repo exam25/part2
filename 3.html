@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Promise Arithmetic</title>
+</head>
+<body>
+    <button onclick="performOperations()">Perform Operations</button>
+
+    <div id="output"></div>
+
+    <script>
+        function add(a, b){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const sum = a + b;
+                    resolve(`The sum of ${a} and ${b} is ${sum}`);
+                }, 1000);
+            });
+        }
+
+        function sub(a, b){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const dif = a - b;
+                    resolve(`The difference of ${a} and ${b} is ${dif}`);
+                }, 1500);
+            });
+        }
+
+        function mul(a, b){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const prod = a * b;
+                    resolve(`The product of ${a} and ${b} is ${prod}`);
+                }, 2000);
+            });
+        }
+
+        function div(a, b){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if(b === 0)
+                        reject("Divide by 0 error");
+                    else{
+                        const quo = a / b;
+                        resolve(`The quotient of ${a} and ${b} is ${quo}`);
+                    }
+                }, 2500);
+            });
+        }
+
+        async function performOperations(){
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "";
+
+            try{
+                const additionResult = await add(5, 2);
+                const subtractionResult = await sub(5, 2);
+                const multiplicationResult = await mul(5, 2);
+                const divisionResult = await div(5, 2);
+
+                outputDiv.innerHTML += `<p>${additionResult}</p>`;
+                outputDiv.innerHTML += `<p>${subtractionResult}</p>`;
+                outputDiv.innerHTML += `<p>${multiplicationResult}</p>`;
+                outputDiv.innerHTML += `<p>${divisionResult}</p>`;
+            }
+            catch(error){
+                outputDiv.innerHTML = `<p>Error: ${error}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
